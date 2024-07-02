@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="VacationDestination.css">
+    </head>
+    <body>
+
+        <div class="Header text-center mb-4 p-4 bg-info rounded">
+        <h1>Vacation Destinations WishList</h1>
+        <p>Found exciting places to visition on your next vacation? Use the form below to add them to your wishlist</p>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6"> 
+                    <div class="Form-body mb-4">
+                        <form id="destinationForm">
+                            <div class="form-group">
+                                <label for="Destination Name">Destination name</label>
+                                <input type="text" id="destinationName" class="form-control Form" name="Destination Name" placeholder="Destination Name">                   
+                            </div>
+                            <div class="form-group">
+                                <label for="Location">Location</label>
+                                <input type="text" id="location" class="form-control Form" name="Location" placeholder="Where is it located?">                 
+                            </div>
+                            <div class="form-group">
+                                <label for="Photo">Photo</label>
+                                <input type="text" id="photo" class="form-control Form" name="Photo" placeholder="Enter an URL of the place">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Description</label>
+                                <input type="text" id="description" class="form-control Form" name="Description" placeholder="Provide details of the location">
+                            </div>
+                            <button id="addToList" type="submit">Add to List</button>                           
+                        </form>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="text-center">WishList</h2>
+                    <div id="wishlist">
+                    </div>
+                </div>
+            </div>
+        </div>       
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+       <script src="VacationDestination.js"></script>
+    </body>
+</html>
