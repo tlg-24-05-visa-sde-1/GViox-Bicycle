@@ -1,0 +1,143 @@
+html {
+    height: 100%;
+    width: 100%;
+    font-family: "Titillium Web", sans-serif;
+  }
+
+body{
+    background: rgb(248, 250, 250);
+}
+
+.Header{
+    background-color: rgb(194, 248, 244);
+}
+
+h1, p{
+    text-align: center;
+}
+
+button {
+    display: block;
+    padding: 10px;
+    background-color: #28a745;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+
+
+.Form-body {
+    max-width: 600px;
+    margin: 20px auto; 
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold; 
+}
+
+#wishlist{
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    display: grid;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+
+#wishlist h2, #wishlist h3 {
+    text-align: center;
+    margin: 20px;
+}
+
+#wishlist-card{
+    position: relative;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: black;
+}
+
+
+#wishlist p{
+    margin: 5px;
+}
+
+#wishlist div {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: rgb(194, 248, 244);
+    text-align: center;
+}
+
+#wishlist img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-columns {
+    column-count: 1; 
+}
+
+.delete-button{
+    background-color: red;
+    color: white;
+    top: 10px;
+    right: 10px;
+    padding: 5px, 10px;
+    display: flex;
+    justify-content: center;
+}
+.edit-button{
+    background-color: yellow;
+    color: black;
+    top: 10px;
+    right: 10px;
+    padding: 5px, 10px;
+    display: flex;
+    justify-content: center;
+}
+.edit-button:hover {
+    background-color: orange;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
