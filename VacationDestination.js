@@ -61,8 +61,13 @@ card.innerHTML =
     <p><strong>Description:</strong> ${description}</p>
     <img src="${photo}" alt="Photo of ${destinationName}" style="max-width: 200px;">
 `;
-card.appendChild(deleteButton)
-card.appendChild(editButton)
+
+let buttonContainer = document.createElement('div')
+buttonContainer.classList.add('button-container')
+buttonContainer.appendChild(deleteButton)
+buttonContainer.appendChild(editButton)
+
+card.appendChild(buttonContainer)
 wishlist.appendChild(card);
 };
 

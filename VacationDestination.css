@@ -115,13 +115,20 @@ button:hover {
     column-count: 1; 
 }
 
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    border-color: rgb(194, 248, 244);
+}
+
 .delete-button{
     background-color: red;
     color: white;
     top: 10px;
     right: 10px;
     padding: 5px, 10px;
-    display: flex;
+    display: center;
     justify-content: center;
 }
 .edit-button{
@@ -130,9 +137,10 @@ button:hover {
     top: 10px;
     right: 10px;
     padding: 5px, 10px;
-    display: flex;
+    display: center;
     justify-content: center;
 }
+
 .edit-button:hover {
     background-color: orange;
 }
