@@ -14,8 +14,9 @@ let formSubmit = (event) => {
     let photo = photoInput.value
     let description = descriptionInput.value
     if(!destinationName || !location || !photo || !description ){
-        return;
+        return alert("please fill in all fields to generate a destination on your wishlist");
     }
+    // added alert message
     renderWishList( destinationName, location, photo, description)
     destinationInput.value= '';
     locationInput.value = '';
