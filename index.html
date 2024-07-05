@@ -7,8 +7,20 @@
     <body>
 
         <header class="Header text-center mb-4 p-4 bg-info rounded">
+            <nav class="navbar navbar-expand-sm navbar-light">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="blog.html">Blog<span class="sr-only"></span></a>
+                    </li>
+
+                  </ul>
+              </nav>
         <h1>Vacation Destinations WishList</h1>
         <p>Found exciting places to visit on your next vacation? Use the form below to add them to your wishlist</p>
+        
         </header>
 
         <main class="container">
@@ -17,7 +29,7 @@
                     <div class="Form-body mb-4">
                         <form id="destinationForm">
                             <div class="form-group">
-                                <label for="Destination Name">Destination name</label>
+                                <label for="Destination Name">Destination Name</label>
                                 <input type="text" id="destinationName" class="form-control Form" name="Destination Name" placeholder="Destination Name">                   
                             </div>
                             <div class="form-group">
@@ -35,7 +47,7 @@
                             <button id="addToList" type="submit">Add to List</button>                           
                         </form>
                     </div>
-                </section>
+                </section>                
                     <section class="col-md-6">
                         <h2 class="text-center">WishList</h2>
                         <div id="wishlist">

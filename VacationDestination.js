@@ -1,4 +1,8 @@
 const wishlist = document.getElementById('wishlist')
+
+// fetch photo function
+//  fetch request will fetch the url
+
 // renders a wishlist item. pass in the parameters needs to make wishlist appear.
 let renderWishList = (destinationName, location, photo, description) =>{
     let card = document.createElement('div');
@@ -97,6 +101,7 @@ let formSubmit = (event) => {
     let photo = photoInput.value
     let description = descriptionInput.value
     // checks if all fields are filled
+    // fetch photo is going to edit the form. we need to fetch the URL instead of user input
     if(!destinationName || !location || !photo || !description ){
         return alert("please fill in all fields to generate a destination on your wishlist"); // returns an alert message if fields are empty
     }
@@ -109,6 +114,7 @@ let formSubmit = (event) => {
     localStorage.setItem('wishlist', JSON.stringify(wishlistItem)) // stores the JSON String into localStorage
     // JSON.stringify Converts a JS object or Array into a JSON string
 
+    // TO-DO: change/ remove the clear photo 
     // this clears the input fields
     destinationInput.value= '';
     locationInput.value = '';
