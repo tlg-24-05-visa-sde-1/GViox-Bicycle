@@ -1,3 +1,4 @@
+const wishlist = document.getElementById('wishlist')
 // renders a wishlist item. pass in the parameters needs to make wishlist appear.
 let renderWishList = (destinationName, location, photo, description) =>{
     let card = document.createElement('div');
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     const locationInput = document.getElementById('location')
     const photoInput = document.getElementById('photo')
     const descriptionInput = document.getElementById('description')
-    const wishlist = document.getElementById('wishlist')
+
     /*
      *   When retrieving data from localStorage, it comes as a string.
      *   You need to convert this string back into its original format using JSON.parse.
@@ -114,7 +115,6 @@ let formSubmit = (event) => {
     photoInput.value = '';
     descriptionInput.value = '';
 }
-
 
     // Event listener to the form for handling the submissions
     destinationForm.addEventListener('submit',formSubmit)
