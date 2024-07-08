@@ -1,4 +1,29 @@
 const wishlist = document.getElementById('wishlist')
+
+// fetch photo function
+//  fetch request will fetch the api key and url
+
+const fetchPhoto = async (query) => {
+    const apiKey = 'dXog8yhrjZjHYHkL05cIXutVPljh5pxYYAzAuWK0nxk';
+    const url = `https://api.unsplash.com/photos/random?query=${query}`
+    try {
+        const response = await fetch(url, {
+            headers: {
+            Authorization: `Client-ID ${apiKey}` 
+            }
+        });
+        const data = await response.json();
+        if (data && data.urls && data.urls.small) {
+            return data.urls.small; // Return the random photo URL
+        } else {
+            throw new Error('No photos found');
+        }
+    } catch (error) {
+        console.error('Error fetching photo:', error);
+        return 'default_photo_url'; // Fallback photo URL
+    }
+};
+
 // renders a wishlist item. pass in the parameters needs to make wishlist appear.
 let renderWishList = (destinationName, location, photo, description) =>{
     let card = document.createElement('div');
@@ -11,7 +36,7 @@ let renderWishList = (destinationName, location, photo, description) =>{
     deleteButton.addEventListener('click', ()  => { 
         card.remove(); // removes the card from the wishlist
         // remove the item from local storage
-        wishlistItem = wishlistItem.filter(item = item.destinationName !== destinationName);
+        wishlistItem = wishlistItem.filter(item => item.destinationName !== destinationName);
         localStorage.setItem('wishlist', JSON.stringify(wishlistItem))
     });
     
@@ -76,6 +101,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
     const photoInput = document.getElementById('photo')
     const descriptionInput = document.getElementById('description')
 
+    wishlist.innerHTML= '';
+
     /*
      *   When retrieving data from localStorage, it comes as a string.
      *   You need to convert this string back into its original format using JSON.parse.
@@ -90,16 +117,20 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
 
     // handles form submission
-let formSubmit = (event) => {
+let formSubmit = async (event) => {
     event.preventDefault(); // prevents the default form submission
     let destinationName = destinationInput.value
     let location = locationInput.value
-    let photo = photoInput.value
+   // let photo = photoInput.value
     let description = descriptionInput.value
+
     // checks if all fields are filled
-    if(!destinationName || !location || !photo || !description ){
+    // fetch photo is going to edit the form. we need to fetch the URL instead of user input
+    if(!destinationName || !location || !description ){
         return alert("please fill in all fields to generate a destination on your wishlist"); // returns an alert message if fields are empty
     }
+
+    let photo = await fetchPhoto(destinationName);
 
     //render the new wish list item
     renderWishList(destinationName, location, photo, description);
@@ -109,10 +140,11 @@ let formSubmit = (event) => {
     localStorage.setItem('wishlist', JSON.stringify(wishlistItem)) // stores the JSON String into localStorage
     // JSON.stringify Converts a JS object or Array into a JSON string
 
+    // TO-DO: change/ remove the clear photo 
     // this clears the input fields
     destinationInput.value= '';
     locationInput.value = '';
-    photoInput.value = '';
+   // photoInput.value = '';
     descriptionInput.value = '';
 }
 
