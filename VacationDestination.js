@@ -1,7 +1,16 @@
 const wishlist = document.getElementById('wishlist')
 
+/* Retrieve the Data from Local Storage from 'wishlist'
+ * JSON.stringify takes a JS object and stores in into a JSON string for local storage
+ * JSON.parse takes the JSON string retrieved from local storage and returns it back as a JS object
+ * we need || [] to ensure if (localStorage.getItem('wishlist')) is 'null' or if parsing fails, wishlist is assigned as an empty array.
+ * This way, wishlistItem is always defined and is an array, even if no data exist in local storage. 
+ */
+
+ let wishlistItem = JSON.parse(localStorage.getItem('wishlist')) || [];
+
 // fetch photo function
-//  fetch request will fetch the api key and url
+// fetch request will fetch the api key and url
 
 const fetchPhoto = async (query) => {
     const apiKey = 'dXog8yhrjZjHYHkL05cIXutVPljh5pxYYAzAuWK0nxk';
@@ -44,28 +53,30 @@ let renderWishList = (destinationName, location, photo, description) =>{
     let editButton = document.createElement('Button')
     editButton.textContent = "Edit";
     editButton.classList.add('edit-button')
-    editButton.addEventListener('click', () => {
+    editButton.addEventListener('click', async () => {
         let newDestinationName = prompt('Edit Destination Name:', destinationName);
         let newLocation = prompt('Edit Location', location);
-        let newPhoto = prompt('Edit Photo', photo);
+     //   let newPhoto = prompt('Edit Photo', photo);
         let newDescription = prompt('Edit Description', description);
     
         if (newDestinationName) destinationName = newDestinationName;
         if (newLocation) location = newLocation;
-        if (newPhoto) photo = newPhoto;
+     //   if (newPhoto) photo = newPhoto;
         if (newDescription) description = newDescription; 
+
+        let newPhoto = await fetchPhoto(newDestinationName || destinationName);
     
             // updates the card's content with the new values. 
         card.querySelector('h3').textContent = destinationName;
         card.querySelector('p:nth-of-type(1)').innerHTML = `<strong>Location:</strong> ${location}`;
         card.querySelector('p:nth-of-type(2)').innerHTML = `<strong>Description:</strong> ${description}`;
-        card.querySelector('img').src = photo;
+        card.querySelector('img').src = newPhoto;
         card.querySelector('img').alt = `Photo of ${destinationName}`;
     
             // updates the item in local storage
         const index = wishlistItem.findIndex(item => item.destinationName === destinationName)
         if (index !== -1) {
-            wishlistItem[index] = {destinationName, location, photo, description}
+            wishlistItem[index] = {destinationName, location, photo: newPhoto, description}
             localStorage.setItem('wishlist', JSON.stringify(wishlistItem))
         }
     });
@@ -93,16 +104,17 @@ let renderWishList = (destinationName, location, photo, description) =>{
     wishlist.appendChild(card);
     };
 
+
+    
 // waiting for the DOM content to load before executing the script
 document.addEventListener('DOMContentLoaded', ()=> {
     const destinationForm = document.getElementById('destinationForm')
     const destinationInput = document.getElementById('destinationName')
     const locationInput = document.getElementById('location')
-    const photoInput = document.getElementById('photo')
+    // const photoInput = document.getElementById('photo')
     const descriptionInput = document.getElementById('description')
 
     wishlist.innerHTML= '';
-
     /*
      *   When retrieving data from localStorage, it comes as a string.
      *   You need to convert this string back into its original format using JSON.parse.
@@ -121,7 +133,7 @@ let formSubmit = async (event) => {
     event.preventDefault(); // prevents the default form submission
     let destinationName = destinationInput.value
     let location = locationInput.value
-   // let photo = photoInput.value
+    // let photo = photoInput.value
     let description = descriptionInput.value
 
     // checks if all fields are filled
@@ -129,7 +141,6 @@ let formSubmit = async (event) => {
     if(!destinationName || !location || !description ){
         return alert("please fill in all fields to generate a destination on your wishlist"); // returns an alert message if fields are empty
     }
-
     let photo = await fetchPhoto(destinationName);
 
     //render the new wish list item
@@ -144,7 +155,7 @@ let formSubmit = async (event) => {
     // this clears the input fields
     destinationInput.value= '';
     locationInput.value = '';
-   // photoInput.value = '';
+    // photoInput.value = '';
     descriptionInput.value = '';
 }
 
