@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="VacationDestination.css">
+        <link rel="stylesheet" href="./VacationDestination.css">
     </head>
     <body>
 
@@ -29,11 +29,11 @@
                     <div class="Form-body mb-4">
                         <form id="destinationForm">
                             <div class="form-group">
-                                <label for="Destination Name">Destination Name</label>
+                                <label for="destinationName">Destination Name</label>
                                 <input type="text" id="destinationName" class="form-control Form" name="Destination Name" placeholder="Destination Name">                   
                             </div>
                             <div class="form-group">
-                                <label for="Location">Location</label>
+                                <label for="location">Location</label>
                                 <input type="text" id="location" class="form-control Form" name="Location" placeholder="Where is it located?">                 
                             </div>
                             <!-- <div class="form-group">
@@ -41,7 +41,7 @@
                                 <input type="text" id="photo" class="form-control Form" name="Photo" placeholder="Enter an URL of the place">
                             </div> -->
                             <div class="form-group">
-                                <label for="">Description</label>
+                                <label for="description">Description</label>
                                 <input type="text" id="description" class="form-control Form" name="Description" placeholder="Provide details of the location">
                             </div>
                             <button id="addToList" type="submit">Add to List</button>                           
@@ -54,7 +54,12 @@
                         </div>
                     </section>
             </div>
-        </main>       
+        </main>
+        
+        <!-- <section id="defaultPhoto" class="container text-center mt-4">
+            <img src="./NLvacation.jpeg" alt=" Default Photo" style="max-width: 100%; height: auto;">
+        </section> -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
        <script src="VacationDestination.js"></script>
