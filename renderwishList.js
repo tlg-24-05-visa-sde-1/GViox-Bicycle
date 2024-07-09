@@ -1,35 +1,10 @@
-const wishlist = document.getElementById('wishlist');
-let wishlistItem = JSON.parse(localStorage.getItem('wishlist')) || [];
-const default_photo_url = './NLvacation.jpeg'; // Define default photo URL
-
-const fetchPhoto = (query) => {
-    const apiKey = 'dXog8yhrjZjHYHkL05cIXutVPljh5pxYYAzAuWK0nxk';
-    const url = `https://api.unsplash.com/photos/random?query=${query}`;
-
-    return fetch(url, {
-        headers: { Authorization: `Client-ID ${apiKey}` }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data) {
-            return data;
-        } else {
-            throw new Error('No Photo Found');
-        }
-    })
-    .catch(error => {
-        console.error('Cannot fetch photo:', error);
-        return default_photo_url; // Return default photo URL on error
-    });
-};
-
+import fetchPhoto from "./fetchPhoto.js";
+import { getWishlistItems, setWishlistItems } from "./wishlistStorage.js";
+const default_photo_url = './NLvacation.jpeg';
 
 let renderWishList = (destinationName, location, photo, description) => {
+    let wishlistItem = getWishlistItems();
+
     let card = document.createElement('div');
     card.classList.add('wishlist');
 
@@ -40,7 +15,7 @@ let renderWishList = (destinationName, location, photo, description) => {
         const index = wishlistItem.findIndex(item => item.destinationName === destinationName);
         if (index !== -1) {
             wishlistItem.splice(index, 1);
-            localStorage.setItem('wishlist', JSON.stringify(wishlistItem));
+            setWishlistItems(wishlistItem);
         }
         card.remove();
     });
@@ -67,7 +42,7 @@ let renderWishList = (destinationName, location, photo, description) => {
             const index = wishlistItem.findIndex(item => item.destinationName === destinationName);
             if (index !== -1) {
                 wishlistItem[index] = { destinationName, location, photo: newPhoto || default_photo_url, description };
-                localStorage.setItem('wishlist', JSON.stringify(wishlistItem));
+                setWishlistItems(wishlistItem);
             }
         });
     });
@@ -86,41 +61,4 @@ let renderWishList = (destinationName, location, photo, description) => {
     card.appendChild(buttonContainer); 
     wishlist.appendChild(card);
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    const destinationForm = document.getElementById('destinationForm');
-    const destinationInput = document.getElementById('destinationName');
-    const locationInput = document.getElementById('location');
-    const descriptionInput = document.getElementById('description');
-    
-    wishlist.innerHTML = '';
-
-    wishlistItem.forEach(item => {
-        renderWishList(item.destinationName, item.location, item.photo, item.description);
-    });
-
-    let formSubmit = (event) => {
-        event.preventDefault(); 
-        let destinationName = destinationInput.value;
-        let location = locationInput.value;
-        let description = descriptionInput.value;
-        
-        if (!destinationName || !location || !description) {
-            return alert("Please fill in all fields to generate a destination on your wishlist");
-        }
-
-        fetchPhoto(destinationName)
-        .then(photo => {
-            renderWishList(destinationName, location, photo, description);
-            wishlistItem.push({ destinationName, location, photo, description });
-            localStorage.setItem('wishlist', JSON.stringify(wishlistItem));
-            destinationInput.value = '';
-            locationInput.value = '';
-            descriptionInput.value = '';
-        }).catch(error => {
-            console.error('Error fetching photo:', error);
-        });
-    };
-
-    destinationForm.addEventListener('submit', formSubmit);
-});
+export default renderWishList;
