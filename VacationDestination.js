@@ -1,33 +1,7 @@
+import fetchPhoto from "./fetchPhoto.js";
+
 const wishlist = document.getElementById('wishlist');
 let wishlistItem = JSON.parse(localStorage.getItem('wishlist')) || [];
-const default_photo_url = './NLvacation.jpeg'; // Define default photo URL
-
-const fetchPhoto = (query) => {
-    const apiKey = 'dXog8yhrjZjHYHkL05cIXutVPljh5pxYYAzAuWK0nxk';
-    const url = `https://api.unsplash.com/photos/random?query=${query}`;
-
-    return fetch(url, {
-        headers: { Authorization: `Client-ID ${apiKey}` }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data) {
-            return data;
-        } else {
-            throw new Error('No Photo Found');
-        }
-    })
-    .catch(error => {
-        console.error('Cannot fetch photo:', error);
-        return default_photo_url; // Return default photo URL on error
-    });
-};
-
 
 let renderWishList = (destinationName, location, photo, description) => {
     let card = document.createElement('div');
