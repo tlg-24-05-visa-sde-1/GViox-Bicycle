@@ -6,7 +6,6 @@ let wishlistItem = JSON.parse(localStorage.getItem('wishlist')) || [];
 let renderWishList = (destinationName, location, photo, description) => {
     let card = document.createElement('div');
     card.classList.add('wishlist');
-
     let deleteButton = document.createElement('button');
     deleteButton.textContent = "Delete";
     deleteButton.classList.add('delete-button');
@@ -74,27 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let formSubmit = (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         let destinationName = destinationInput.value;
         let location = locationInput.value;
         let description = descriptionInput.value;
-        
+      
         if (!destinationName || !location || !description) {
-            return alert("Please fill in all fields to generate a destination on your wishlist");
+          return alert("Please fill in all fields to generate a destination on your wishlist");
         }
-
-        fetchPhoto(destinationName)
-        .then(photo => {
+      
+        fetchPhoto(destinationName).then(photo => {
+          fetch('/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ destinationName, location, photo, description })
+          })
+          .then(response => response.json())
+          .then(data => {
             renderWishList(destinationName, location, photo, description);
-            wishlistItem.push({ destinationName, location, photo, description });
-            localStorage.setItem('wishlist', JSON.stringify(wishlistItem));
             destinationInput.value = '';
             locationInput.value = '';
             descriptionInput.value = '';
-        }).catch(error => {
-            console.error('Error fetching photo:', error);
+          })
+          .catch(error => console.error('Error adding destination:', error));
         });
-    };
+      };
+      
 
     destinationForm.addEventListener('submit', formSubmit);
 });

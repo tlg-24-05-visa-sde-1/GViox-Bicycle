@@ -1,5 +1,5 @@
 const default_photo_url = './NLvacation.jpeg';
-
+const default_loading_photo = './RugratsVacation.jpeg';
 const fetchPhoto = (query) => {
     const apiKey = 'dXog8yhrjZjHYHkL05cIXutVPljh5pxYYAzAuWK0nxk';
     const url = `https://api.unsplash.com/photos/random?query=${query}`;
