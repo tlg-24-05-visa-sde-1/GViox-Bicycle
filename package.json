@@ -1,0 +1,26 @@
+{
+  "name": "gviox-bicycle",
+  "version": "1.0.0",
+  "description": "One of the students who got back on the Bike",
+  "main": "VacationDestination.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tlg-24-05-visa-sde-1/GViox-Bicycle.git"
+  },
+  "author": "Gabriel Viox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tlg-24-05-visa-sde-1/GViox-Bicycle/issues"
+  },
+  "homepage": "https://github.com/tlg-24-05-visa-sde-1/GViox-Bicycle#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
