@@ -83,22 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       
         fetchPhoto(destinationName).then(photo => {
-          fetch('/wishlist', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ destinationName, location, photo, description })
-          })
-          .then(response => response.json())
-          .then(data => {
-            renderWishList(destinationName, location, photo, description);
-            destinationInput.value = '';
-            locationInput.value = '';
-            descriptionInput.value = '';
-          })
-          .catch(error => console.error('Error adding destination:', error));
+          // Store data directly in localStorage
+          wishlistItem.push({ destinationName, location, photo, description });
+          localStorage.setItem('wishlist', JSON.stringify(wishlistItem));
+          
+          renderWishList(destinationName, location, photo, description);
+          
+          destinationInput.value = '';
+          locationInput.value = '';
+          descriptionInput.value = '';
         });
-      };
-      
-
+    };
+    
     destinationForm.addEventListener('submit', formSubmit);
 });
